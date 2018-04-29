@@ -1,0 +1,10 @@
+<div class="total-count">{{totalCount}}</div>
+<app-counter [count]="counters[0]"
+    (more)="more.emit(0)"
+    (less)="less.emit(0)"></app-counter>
+<app-counter [count]="counters[1]"
+    (more)="more.emit(1)"
+    (less)="less.emit(1)"></app-counter>
+<app-counter [count]="counters[2]"
+    (more)="more.emit(2)"
+    (less)="less.emit(2)"></app-counter>
