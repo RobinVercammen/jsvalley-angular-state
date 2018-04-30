@@ -14,3 +14,8 @@ Global object
 
 
 
+# <i class="fa fa-home fa-3x"></i>
+Store based
+
+
+
