@@ -17,4 +17,15 @@ export class CounterComponent implements OnInit {
   ngOnInit() {
   }
 
+  fireMore() {
+    setTimeout(() => {
+      this.more.emit();
+    });
+  }
+
+  fireLess() {
+    setTimeout(() => {
+      this.less.emit();
+    });
+  }
 }
