@@ -6,3 +6,11 @@
 
 ## <i class="fa fa-sitemap fa-3x"></i>
 Component hierarchy
+
+
+
+# <i class="fa fa-code fa-3x"></i>
+Global object
+
+
+
