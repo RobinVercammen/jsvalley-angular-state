@@ -1,5 +1,7 @@
+import { CounterStore } from './../../services/counter.store';
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { StateService } from '../../services/state.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-counter',
@@ -8,23 +10,21 @@ import { StateService } from '../../services/state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CounterComponent implements OnInit {
+  count$: Observable<number>;
   @Input() counterId;
 
-  constructor(public state: StateService) { }
+  constructor(private counterStore: CounterStore) { }
 
   ngOnInit() {
+    this.count$ = this.counterStore.counters$.pipe(
+      map(c => c[this.counterId])
+    );
   }
 
   more() {
-    setTimeout(() => {
-      this.state.counters[this.counterId]++;
-      this.state.counters.total++;
-    });
+    this.counterStore.loadMore(this.counterId);
   }
   less() {
-    setTimeout(() => {
-      this.state.counters[this.counterId]--;
-      this.state.counters.total--;
-    });
+    this.counterStore.loadLess(this.counterId);
   }
 }

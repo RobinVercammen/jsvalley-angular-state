@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { MockResourceLoader } from '@angular/compiler/testing';
-import { StateService } from '../../services/state.service';
+import { CounterStore } from '../../services/counter.store';
+import { map } from "rxjs/operators";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-counter-overview',
@@ -9,8 +11,12 @@ import { StateService } from '../../services/state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CounterOverviewComponent implements OnInit {
-  constructor(public state: StateService) {
+  total$: Observable<number>;
 
+  constructor(counterStore: CounterStore) {
+    this.total$ = counterStore.counters$.pipe(
+      map(c => c.total)
+    );
   }
 
   ngOnInit() {
