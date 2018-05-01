@@ -19,3 +19,6 @@ Store based
 
 
 
+# <i class="fa fa-eye fa-3x"></i>
+Observable state
+
