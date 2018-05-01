@@ -15,7 +15,7 @@ export class CounterOverviewComponent implements OnInit {
 
   constructor(counterStore: CounterStore) {
     this.total$ = counterStore.counters$.pipe(
-      map(c => c.total)
+      map(c => Object.keys(c).reduce((prev, curr) => prev + c[curr], 0))
     );
   }
 
