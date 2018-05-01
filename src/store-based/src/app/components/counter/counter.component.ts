@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { StateService } from '../../services/state.service';
 import { Store } from '@ngrx/store';
-import { More, Less } from '../../actions/counter-actions';
+import { More, Less, LessAsync, MoreAsync } from '../../actions/counter-actions';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { State } from '../../app.module';
@@ -14,7 +14,7 @@ import { State } from '../../app.module';
 })
 export class CounterComponent implements OnInit {
   counter$: Observable<number>;
-  @Input() counterId;
+  @Input() counterId: number;
 
   constructor(private store: Store<State>) {
     this.counter$ = store.pipe(
@@ -27,13 +27,9 @@ export class CounterComponent implements OnInit {
   }
 
   more() {
-    setTimeout(() => {
-      this.store.dispatch(new More(this.counterId));
-    });
+    this.store.dispatch(new MoreAsync({ id: this.counterId }));
   }
   less() {
-    setTimeout(() => {
-      this.store.dispatch(new Less(this.counterId));
-    });
+    this.store.dispatch(new LessAsync({ id: this.counterId }));
   }
 }
